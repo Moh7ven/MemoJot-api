@@ -44,17 +44,28 @@ export const getNoteById = async (req, res) => {
   }
 };
 
-/* export const updateNote = async (req, res) => {
+export const updateNote = async (req, res) => {
   try {
     const idNote = req.params.id;
     const { title, content } = req.body;
-    const note = await Notes.findByIdAndUpdate(idNote, {
+
+    if (title === "" || content === "") {
+      res.status(401).json({ message: "Veuillez remplir les champs " });
+    }
+
+    const noteToModified = {
       title: title,
       content: content,
-    });
-    res.status(200).json({ data: note, message: "Note updated" });
+    };
+
+    await Notes.findByIdAndUpdate(idNote, noteToModified);
+    res.status(200).json({ data: noteToModified, message: "Note updated" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: error.message });
+    res
+      .status(500)
+      .json({ error: error.message, message: "Une erreur est survenue" });
   }
-}; */
+};
+
+
