@@ -36,6 +36,7 @@ export const getAllNotes = async (req, res) => {
 export const getNoteById = async (req, res) => {
   try {
     const idNote = req.params.id;
+    console.log(typeof idNote);
     const note = await Notes.findById(idNote);
     res.status(200).json(note);
   } catch (error) {
