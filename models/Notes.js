@@ -11,7 +11,7 @@ const NoteSchema = new mongoose.Schema({
   },
   created_at: {
     type: Date,
-    default: Date.now(),
+    required: true,
   },
 });
 const Notes = mongoose.model("Notes", NoteSchema);

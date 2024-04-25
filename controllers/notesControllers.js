@@ -11,13 +11,50 @@ export const addNote = async (req, res) => {
     const note = new Notes({
       title: title,
       content: content,
+      created_at: new Date(),
     });
 
     await note.save();
-    res.status(200).json({ message: "Note save" });
+    res.status(200).json({ data: note, message: "Note save" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
   }
 };
 
+export const getAllNotes = async (req, res) => {
+  try {
+    const notes = await Notes.find();
+    res.status(200).json(notes);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: error.message, message: "Une erreur est survenue" });
+  }
+};
+
+export const getNoteById = async (req, res) => {
+  try {
+    const idNote = req.params.id;
+    const note = await Notes.findById(idNote);
+    res.status(200).json(note);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+/* export const updateNote = async (req, res) => {
+  try {
+    const idNote = req.params.id;
+    const { title, content } = req.body;
+    const note = await Notes.findByIdAndUpdate(idNote, {
+      title: title,
+      content: content,
+    });
+    res.status(200).json({ data: note, message: "Note updated" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+}; */
