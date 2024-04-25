@@ -68,4 +68,15 @@ export const updateNote = async (req, res) => {
   }
 };
 
-
+export const deleteNote = async (req, res) => {
+  try {
+    const idNote = req.params.id;
+    const note = await Notes.findByIdAndDelete(idNote);
+    res.status(200).json({ data: note, message: "Note deleted" });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: error.message, message: "Une erreur est survenue" });
+  }
+};
