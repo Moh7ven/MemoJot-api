@@ -15,7 +15,7 @@ export const addNote = async (req, res) => {
     });
 
     await note.save();
-    res.status(200).json({ data: note, message: "Note save" });
+    res.status(200).json(note, { message: "Note save" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
@@ -25,7 +25,7 @@ export const addNote = async (req, res) => {
 export const getAllNotes = async (req, res) => {
   try {
     const notes = await Notes.find();
-    res.status(200).json(notes);
+    res.status(200).json(notes, { message: "All notes" });
   } catch (error) {
     res
       .status(500)
