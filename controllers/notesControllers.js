@@ -1,5 +1,6 @@
 import Notes from "../models/Notes.js";
 
+// function addNote()
 export const addNote = async (req, res) => {
   try {
     const { title, content } = req.body;
@@ -21,7 +22,7 @@ export const addNote = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
+// function getAllNotes
 export const getAllNotes = async (req, res) => {
   try {
     const notes = await Notes.find();
