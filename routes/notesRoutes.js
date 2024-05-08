@@ -11,6 +11,7 @@ import multer from "multer";
 const router = express.Router();
 const upload = multer();
 
+//ROUTE FOR ADD NOTE
 router.post("/addNote", upload.any(), addNote);
 
 router.get("/getAllNotes", upload.any(), getAllNotes);
